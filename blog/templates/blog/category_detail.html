@@ -1,0 +1,41 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}{{ category.name }} — ParaguayPath{% endblock %}
+
+{% block content %}
+<div class="mb-8">
+    <a href="{% url 'blog:article_list' %}" class="text-gold hover:underline text-sm">
+        ← Back to Blog
+    </a>
+    <h1 class="text-3xl font-bold text-forest mt-3">{{ category.name }}</h1>
+    <p class="text-gray-500 mt-1">All articles in this category</p>
+</div>
+
+{% for article in articles %}
+<article class="mb-8 border-b border-gray-200 pb-8">
+    {% if article.image %}
+    <img src="{{ article.image.url }}" alt="{{ article.title }}"
+         class="w-full h-56 object-cover rounded-lg mb-4">
+    {% endif %}
+
+    <h2 class="text-xl font-bold text-forest mb-2">
+        <a href="{% url 'blog:article_detail' article.slug %}"
+           class="hover:text-gold transition-colors">
+            {{ article.title }}
+        </a>
+    </h2>
+
+    <p class="text-gray-600 mb-3">{{ article.perex }}</p>
+
+    <div class="flex items-center justify-between text-sm text-gray-400">
+        <span>{{ article.published|date:"F j, Y" }}</span>
+        <a href="{% url 'blog:article_detail' article.slug %}"
+           class="text-gold font-medium hover:underline">
+            Read more →
+        </a>
+    </div>
+</article>
+{% empty %}
+<p class="text-gray-500">No articles in this category yet.</p>
+{% endfor %}
+{% endblock %}

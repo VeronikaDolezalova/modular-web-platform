@@ -1,0 +1,58 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Search — ParaguayPath{% endblock %}
+
+{% block content %}
+<div class="mb-8">
+    <h1 class="text-3xl font-bold text-forest">Search</h1>
+
+    <form method="GET" action="{% url 'blog:search' %}" class="mt-4 flex gap-3">
+        <input type="text" name="q" value="{{ query }}"
+               placeholder="Search articles..."
+               class="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-forest">
+        <button type="submit"
+                class="bg-forest text-white px-6 py-2 rounded-lg hover:bg-gold transition-colors">
+            Search
+        </button>
+    </form>
+</div>
+
+{% if query %}
+<p class="text-gray-500 mb-6">
+    Results for <span class="font-medium text-forest">"{{ query }}"</span>
+</p>
+
+{% for article in articles %}
+<article class="mb-8 border-b border-gray-200 pb-8">
+    <div class="flex gap-2 mb-2">
+        {% for category in article.categories.all %}
+        <a href="{% url 'blog:category_detail' category.slug %}"
+           class="text-xs bg-gold text-white px-2 py-1 rounded-full hover:opacity-80 transition-opacity">
+            {{ category.name }}
+        </a>
+        {% endfor %}
+    </div>
+
+    <h2 class="text-xl font-bold text-forest mb-2">
+        <a href="{% url 'blog:article_detail' article.slug %}"
+           class="hover:text-gold transition-colors">
+            {{ article.title }}
+        </a>
+    </h2>
+
+    <p class="text-gray-600 mb-3">{{ article.perex }}</p>
+
+    <div class="flex items-center justify-between text-sm text-gray-400">
+        <span>{{ article.published|date:"F j, Y" }}</span>
+        <a href="{% url 'blog:article_detail' article.slug %}"
+           class="text-gold font-medium hover:underline">
+            Read more →
+        </a>
+    </div>
+</article>
+{% empty %}
+<p class="text-gray-500">No articles found for "{{ query }}".</p>
+{% endfor %}
+
+{% endif %}
+{% endblock %}

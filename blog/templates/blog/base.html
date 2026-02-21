@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ParaguayPath{% endblock %}</title>
+    <link href="{% static 'css/output.css' %}" rel="stylesheet">
+</head>
+<body class="bg-cream text-gray-900 min-h-screen flex flex-col">
+
+    <!-- Navigation -->
+    <nav class="bg-forest text-white px-6 py-4 flex items-center justify-between">
+        <a href="{% url 'blog:article_list' %}" class="text-xl font-bold tracking-wide">
+            ParaguayPath
+        </a>
+        <div class="flex items-center gap-6 text-sm">
+            <a href="{% url 'blog:article_list' %}" class="hover:text-gold transition-colors">Blog</a>
+            <form method="GET" action="{% url 'blog:search' %}" class="flex gap-2">
+                <input type="text" name="q" placeholder="Search..."
+                       class="bg-white text-gray-900 rounded-lg px-3 py-1 text-sm focus:outline-none w-40">
+                <button type="submit"
+                        class="bg-gold text-white px-3 py-1 rounded-lg hover:opacity-80 transition-opacity">
+                    Search
+                </button>
+            </form>
+
+            {% if user.is_authenticated %}
+            <span class="text-cream text-sm">{{ user.email }}</span>
+            <a href="{% url 'account_logout' %}"
+            class="hover:text-gold transition-colors">Log out</a>
+            {% else %}
+            <a href="{% url 'account_login' %}"
+            class="hover:text-gold transition-colors">Log in</a>
+            <a href="{% url 'account_signup' %}"
+            class="bg-gold text-white px-3 py-1 rounded-lg hover:opacity-80 transition-opacity">
+                Sign up
+            </a>
+            {% endif %}
+        </div>
+        
+    </nav>
+
+    <!-- Main content -->
+    <main class="flex-1 max-w-5xl mx-auto w-full px-6 py-10">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-forest text-white text-center py-6 text-sm">
+        <p>&copy; 2026 ParaguayPath</p>
+    </footer>
+
+</body>
+</html>

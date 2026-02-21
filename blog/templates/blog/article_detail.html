@@ -1,0 +1,59 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}{{ article.title }} — ParaguayPath{% endblock %}
+
+{% block content %}
+<article class="max-w-3xl mx-auto">
+
+    <!-- Categories -->
+    <div class="flex gap-2 mb-4">
+        {% for category in article.categories.all %}
+        <a href="{% url 'blog:category_detail' category.slug %}"
+           class="text-xs bg-gold text-white px-2 py-1 rounded-full hover:opacity-80 transition-opacity">
+            {{ category.name }}
+        </a>
+        {% endfor %}
+    </div>
+
+    <!-- Title -->
+    <h1 class="text-4xl font-bold text-forest mb-3">{{ article.title }}</h1>
+
+    <!-- Date -->
+    <p class="text-gray-400 text-sm mb-6">{{ article.published|date:"F j, Y" }}</p>
+
+    <!-- Image -->
+    {% if article.image %}
+    <img src="{{ article.image.url }}" alt="{{ article.title }}"
+         class="w-full h-72 object-cover rounded-lg mb-8">
+    {% endif %}
+
+    <!-- Perex -->
+    <p class="text-lg text-gray-600 font-medium border-l-4 border-gold pl-4 mb-8">
+        {{ article.perex }}
+    </p>
+
+    <!-- Content -->
+    <div class="prose prose-lg text-gray-800 leading-relaxed">
+        {{ article.content|linebreaks }}
+    </div>
+
+    <!-- Facebook discussion -->
+    {% if article.fb_discussion_url %}
+    <div class="mt-12 p-6 bg-gray-50 rounded-lg border border-gray-200">
+        <p class="text-gray-600 mb-3">Join the discussion on Facebook</p>
+        <a href="{{ article.fb_discussion_url }}" target="_blank"
+           class="inline-block bg-forest text-white px-5 py-2 rounded-lg hover:bg-gold transition-colors">
+            Comment on Facebook →
+        </a>
+    </div>
+    {% endif %}
+
+    <!-- Back link -->
+    <div class="mt-10">
+        <a href="{% url 'blog:article_list' %}" class="text-gold hover:underline">
+            ← Back to Blog
+        </a>
+    </div>
+
+</article>
+{% endblock %}
