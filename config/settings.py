@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'users',
+    'files', 
     'allauth',
     'allauth.account',
     'allauth.socialaccount',  # needed for Google/FB login later
