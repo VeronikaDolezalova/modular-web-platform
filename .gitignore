@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 *.pyo
+*.pyc
 
 # Virtual environment
 venv/
@@ -29,8 +30,5 @@ static/css/output.css
 .DS_Store
 Thumbs.db
 
-# Python cache
-__pycache__/
-*.pyc
-
-# Finalni-verze
+# Other
+Finalni-verze/
