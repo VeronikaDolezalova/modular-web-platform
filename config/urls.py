@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls', namespace='blog')),  # connect blog URLs
     path('accounts/', include('allauth.urls')),  # registration, login, logout
+    path('files/', include('files.urls', namespace='files')),  # downloadable files
 ]

@@ -1,0 +1,51 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Downloads — ParaguayPath{% endblock %}
+
+{% block content %}
+<div class="mb-8">
+    <h1 class="text-3xl font-bold text-forest">Downloads</h1>
+    <p class="text-gray-500 mt-1">Free guides and e-books</p>
+</div>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for file in files %}
+    <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+
+        <!-- Image or placeholder -->
+        {% if file.image %}
+        <img src="{{ file.image.url }}" alt="{{ file.name }}"
+             class="w-full h-48 object-cover">
+        {% else %}
+        <div class="w-full h-48 bg-cream flex items-center justify-center">
+            <span class="text-4xl">📄</span>
+        </div>
+        {% endif %}
+
+        <!-- Content -->
+        <div class="p-4">
+            <h2 class="text-lg font-bold text-forest mb-2">{{ file.name }}</h2>
+
+            {% if file.description %}
+            <p class="text-gray-600 text-sm mb-4">{{ file.description|truncatewords:20 }}</p>
+            {% endif %}
+
+            <div class="flex gap-2">
+                <a href="{{ file.file.url }}" download
+                   class="flex-1 text-center bg-forest text-white px-4 py-2 rounded-lg hover:bg-gold transition-colors text-sm">
+                    Download
+                </a>
+                {% if file.has_detail_page %}
+                <a href="{% url 'files:file_detail' file.slug %}"
+                   class="px-4 py-2 border border-forest text-forest rounded-lg hover:bg-cream transition-colors text-sm">
+                    More
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-gray-500 col-span-3">No files available yet.</p>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}{{ file.name }} — ParaguayPath{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto">
+
+    <!-- Back link -->
+    <a href="{% url 'files:file_list' %}" class="text-gold hover:underline text-sm">
+        ← Back to Downloads
+    </a>
+
+    <!-- Title -->
+    <h1 class="text-4xl font-bold text-forest mt-4 mb-3">{{ file.name }}</h1>
+
+    {% if file.author %}
+    <p class="text-gray-400 text-sm mb-6">By {{ file.author.get_full_name|default:file.author.username }}</p>
+    {% endif %}
+
+    <!-- Image -->
+    {% if file.image %}
+    <img src="{{ file.image.url }}" alt="{{ file.name }}"
+         class="w-full h-72 object-cover rounded-lg mb-8">
+    {% endif %}
+
+    <!-- Description -->
+    {% if file.description %}
+    <p class="text-lg text-gray-600 font-medium border-l-4 border-gold pl-4 mb-8">
+        {{ file.description }}
+    </p>
+    {% endif %}
+
+    <!-- Content -->
+    {% if file.content %}
+    <div class="text-gray-800 leading-relaxed mb-10">
+        {{ file.content|linebreaks }}
+    </div>
+    {% endif %}
+
+    <!-- Download button -->
+    <a href="{{ file.file.url }}" download
+       class="inline-block bg-forest text-white px-8 py-3 rounded-lg hover:bg-gold transition-colors">
+        Download for free →
+    </a>
+
+</div>
+{% endblock %}
