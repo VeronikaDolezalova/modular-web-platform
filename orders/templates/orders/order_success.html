@@ -1,0 +1,29 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Order Received — ParaguayPath{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto text-center">
+
+    <div class="text-6xl mb-6">✅</div>
+
+    <h1 class="text-3xl font-bold text-forest mb-4">Order Received!</h1>
+
+    <p class="text-gray-600 mb-8">
+        Thank you for your interest. We will get back to you
+        within 24 hours at the email address you provided.
+    </p>
+
+    <div class="flex gap-4 justify-center">
+        <a href="{% url 'orders:package_list' %}"
+           class="border border-forest text-forest px-6 py-2 rounded-lg hover:bg-cream transition-colors">
+            Back to Services
+        </a>
+        <a href="{% url 'blog:article_list' %}"
+           class="bg-forest text-white px-6 py-2 rounded-lg hover:bg-gold transition-colors">
+            Read Blog
+        </a>
+    </div>
+
+</div>
+{% endblock %}

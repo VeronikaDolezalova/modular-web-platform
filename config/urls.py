@@ -22,4 +22,5 @@ urlpatterns = [
     path('blog/', include('blog.urls', namespace='blog')),  # connect blog URLs
     path('accounts/', include('allauth.urls')),  # registration, login, logout
     path('files/', include('files.urls', namespace='files')),  # downloadable files
+    path('orders/', include('orders.urls', namespace='orders')), # orders of services
 ]

@@ -14,8 +14,12 @@
         <a href="{% url 'blog:article_list' %}" class="text-xl font-bold tracking-wide">
             ParaguayPath
         </a>
+        
         <div class="flex items-center gap-6 text-sm">
             <a href="{% url 'blog:article_list' %}" class="hover:text-gold transition-colors">Blog</a>
+            <a href="{% url 'files:file_list' %}" class="hover:text-gold transition-colors">Downloads</a>
+            <a href="{% url 'orders:package_list' %}" class="hover:text-gold transition-colors">Services</a>
+         
             <form method="GET" action="{% url 'blog:search' %}" class="flex gap-2">
                 <input type="text" name="q" placeholder="Search..."
                        class="bg-white text-gray-900 rounded-lg px-3 py-1 text-sm focus:outline-none w-40">

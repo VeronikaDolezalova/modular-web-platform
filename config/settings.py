@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'blog',
     'users',
     'files', 
+    'orders',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',  # needed for Google/FB login later
@@ -142,3 +143,5 @@ ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']
 
 # for development, print emails to console instead of sending
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+ADMIN_EMAIL = 'tvuj@email.com'  # email for order notifications

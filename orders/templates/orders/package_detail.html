@@ -1,0 +1,55 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}{{ package.name }} — ParaguayPath{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto">
+
+    <!-- Back link -->
+    <a href="{% url 'orders:package_list' %}" class="text-gold hover:underline text-sm">
+        ← Back to Services
+    </a>
+
+    <!-- Title & price -->
+    <h1 class="text-4xl font-bold text-forest mt-4 mb-2">{{ package.name }}</h1>
+    <p class="text-3xl font-bold text-gold mb-6">${{ package.price }}</p>
+
+    <!-- Full description -->
+    <div class="text-gray-800 leading-relaxed mb-10">
+        {{ package.content|linebreaks }}
+    </div>
+
+    <!-- Order form -->
+    <div class="border border-gray-200 rounded-lg p-6">
+        <h2 class="text-xl font-bold text-forest mb-6">Order this package</h2>
+
+        <form method="POST" class="flex flex-col gap-4">
+            {% csrf_token %}
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Your name *</label>
+                <input type="text" name="name" required
+                       class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-forest">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Your email *</label>
+                <input type="email" name="email" required
+                       class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-forest">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Message (optional)</label>
+                <textarea name="message" rows="4"
+                          class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-forest"></textarea>
+            </div>
+
+            <button type="submit"
+                    class="bg-forest text-white px-8 py-3 rounded-lg hover:bg-gold transition-colors">
+                Send Order Request
+            </button>
+        </form>
+    </div>
+
+</div>
+{% endblock %}
